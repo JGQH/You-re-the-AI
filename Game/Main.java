@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 //CUSTOM
 import Classes.GScreen;
+import Classes.GPlayer;
 
 public class Main{
     private static GScreen GameScreen = new GScreen();
@@ -29,18 +30,27 @@ public class Main{
         Screen.addKeyListener(new KeyListener(){
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(e.getKeyChar());
+                switch(e.getKeyChar()){
+                    case 'w':
+                        GPlayer.Y -= 1;
+                        break;
+                    case 'a':
+                        GPlayer.X -= 1;
+                        break;
+                    case 's':
+                        GPlayer.Y += 1;
+                        break;
+                    case 'd':
+                        GPlayer.X += 1;
+                        break;
+                }
             }
 
             @Override
-            public void keyTyped(KeyEvent e) {
-                
-            }
+            public void keyTyped(KeyEvent e) {}
 
             @Override
-            public void keyReleased(KeyEvent e) {
-                
-            }
+            public void keyReleased(KeyEvent e) {}
        });
     }
 

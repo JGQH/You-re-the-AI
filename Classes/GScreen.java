@@ -1,9 +1,10 @@
 package Classes;
 
+//NATIVE
 import java.awt.*;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
 public class GScreen extends JPanel{
     private static final long serialVersionUID = 1L;
     // CONSTANTS
@@ -16,9 +17,11 @@ public class GScreen extends JPanel{
 
     @Override
     public void paintComponent(Graphics g){
+        super.paintComponent(g);
         Image tesuto = new ImageIcon("Resources/Sonar.png").getImage();
         Graphics2D g2d = (Graphics2D)g;
-        g2d.drawRect(50, 50, 100, 100);
+        
         g2d.drawImage(tesuto, 0, 0, 576, 576, this);
+        g2d.drawRect(GPlayer.X, GPlayer.Y, 100, 100);
     }
 }
