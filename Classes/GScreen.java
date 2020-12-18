@@ -22,6 +22,6 @@ public class GScreen extends JPanel{
         Graphics2D g2d = (Graphics2D)g;
         
         g2d.drawImage(tesuto, 0, 0, 576, 576, this);
-        g2d.drawRect(GPlayer.X, GPlayer.Y, 100, 100);
+        g2d.drawRect(GGame.X, GGame.Y, 100, 100);
     }
 }

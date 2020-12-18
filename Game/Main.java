@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 //CUSTOM
 import Classes.GScreen;
-import Classes.GPlayer;
+import Classes.GGame;
 
 public class Main{
     private static GScreen GameScreen = new GScreen();
@@ -32,16 +32,16 @@ public class Main{
             public void keyPressed(KeyEvent e) {
                 switch(e.getKeyChar()){
                     case 'w':
-                        GPlayer.Y -= 1;
+                        GGame.Y -= 1;
                         break;
                     case 'a':
-                        GPlayer.X -= 1;
+                        GGame.X -= 1;
                         break;
                     case 's':
-                        GPlayer.Y += 1;
+                        GGame.Y += 1;
                         break;
                     case 'd':
-                        GPlayer.X += 1;
+                        GGame.X += 1;
                         break;
                 }
             }
