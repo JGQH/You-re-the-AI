@@ -9,15 +9,26 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 //CUSTOM
 import Classes.GScreen;
+import Extras.GVector;
 import Classes.GGame;
+import Classes.GLabyrinth;
 
-public class Main{
+public class Main {
     private static GScreen GameScreen = new GScreen();
     private static final int FPS = 30;
 
     public static void main(String[] args) {
+        prepareGame();
         createGame();
         startTimer();
+    }
+
+    private static void prepareGame() {
+        GGame.Rotation = 0;
+        GGame.position = new GVector(1, 1);
+        GGame.distances = new float[GGame.RAY_COUNT];
+        GGame.collisions = new GVector[GGame.RAY_COUNT];
+        GGame.labyrinth = new GLabyrinth(3);
     }
 
     private static void createGame() {
@@ -32,16 +43,30 @@ public class Main{
             public void keyPressed(KeyEvent e) {
                 switch(e.getKeyChar()){
                     case 'w':
-                        GGame.Y -= 1;
+                        if(GGame.position.y > 0){
+                            GGame.position.y -= 1;
+                        }
                         break;
                     case 'a':
-                        GGame.X -= 1;
+                        if(GGame.position.x > 0){
+                            GGame.position.x -= 1;
+                        }
                         break;
                     case 's':
-                        GGame.Y += 1;
+                        if(GGame.position.y < GGame.labyrinth.SIZE * GLabyrinth.SCALER){
+                            GGame.position.y += 1;
+                        }
                         break;
                     case 'd':
-                        GGame.X += 1;
+                        if(GGame.position.x < GGame.labyrinth.SIZE * GLabyrinth.SCALER){
+                            GGame.position.x += 1;
+                        }
+                        break;
+                    case 'q':
+                        GGame.Rotation = (GGame.Rotation == 315) ? 0 : (GGame.Rotation + 45);
+                        break;
+                    case 'e':
+                        GGame.Rotation = (GGame.Rotation == 0) ? 315 : (GGame.Rotation - 45);
                         break;
                 }
             }
@@ -59,6 +84,7 @@ public class Main{
         ActionListener evt = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
+                GGame.calculateDistances();
                 GameScreen.repaint();
 			}
         };

@@ -2,8 +2,10 @@ package Classes;
 
 //NATIVE
 import java.awt.*;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
+import Extras.GBoundary;
+import Extras.GVector;
 
 public class GScreen extends JPanel{
     private static final long serialVersionUID = 1L;
@@ -18,10 +20,16 @@ public class GScreen extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        Image tesuto = new ImageIcon("Resources/Sonar.png").getImage();
         Graphics2D g2d = (Graphics2D)g;
         
-        g2d.drawImage(tesuto, 0, 0, 576, 576, this);
-        g2d.drawRect(GGame.X, GGame.Y, 100, 100);
+        for (GBoundary boundary: GGame.boundaries){
+            g2d.drawLine(boundary.x1, boundary.y1, boundary.x2, boundary.y2);
+        }
+        for (int i = 0; i < GGame.RAY_COUNT; i++) {
+            GVector collision = GGame.collisions[i];
+            g2d.drawString(Float.toString(collision.x), 70, 70 + 20 * i);
+            g2d.drawString(Float.toString(collision.y), 150, 70 + 20 * i);
+            g2d.drawOval((int)collision.x - 2, (int)collision.y - 2, 4, 4);
+        }
     }
 }
