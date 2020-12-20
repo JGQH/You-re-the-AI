@@ -10,6 +10,7 @@ public class GLabyrinth {
     public Cell[][] contents;
     public GLabyrinth(int size){
         this.SIZE = size;
+        GGame.MAX_DIST = this.SIZE * SCALER;
         
         initializeContent();
         createLabyrinth();

@@ -5,7 +5,9 @@ import java.util.Vector;
 import Extras.GBoundary;
 import Extras.GVector;
 public class GGame {
-    public static final int RAY_COUNT = 8;
+    public static final int RAY_COUNT = 32;
+    public static int MAX_DIST;
+
     public static GVector position;
     public static float Rotation;
     public static float[] distances;

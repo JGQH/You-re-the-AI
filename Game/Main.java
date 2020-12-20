@@ -28,6 +28,7 @@ public class Main {
         GGame.position = new GVector(1, 1);
         GGame.distances = new float[GGame.RAY_COUNT];
         GGame.collisions = new GVector[GGame.RAY_COUNT];
+
         GGame.labyrinth = new GLabyrinth(3);
     }
 
