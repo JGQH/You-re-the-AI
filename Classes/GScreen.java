@@ -30,7 +30,7 @@ public class GScreen extends JPanel{
         for (int i = 0; i < GGame.RAY_COUNT; i++) {
             float dis = GGame.distances[i];
             int x = 36 +224 + (int)(504 * (i + 1) / (GGame.RAY_COUNT + 1));
-            int y = (int)scale(dis, 0, GGame.MAX_DIST, 414, 162); //(576 / 2) +- (540 - 36) / 3
+            int y = (int)scale(dis, 0, GGame.MAX_DIST, 280, 120);
 
             g2d.drawLine(lastX, lastY, x, y);
 
