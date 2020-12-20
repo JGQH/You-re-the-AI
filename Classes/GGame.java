@@ -14,11 +14,12 @@ public class GGame {
     public static Vector<GBoundary> boundaries;
 
     public static void calculateDistances(){
-        //Sends 8 rays around the position to "see" the walls
+        //Sends RAY_COUNT rays around the position to "see" the walls
         for(int i = 0; i < RAY_COUNT; i++){
             int dir = i * 360 / RAY_COUNT; 
             GVector ray = new GVector(dir + Rotation);
-            GVector pt = getCollision(ray);
+            GVector mpt = getCollision(ray);
+            GVector pt = GVector.diff(mpt, GGame.position);
             distances[i] = pt.magnitude();
             collisions[i] = pt;
         }
