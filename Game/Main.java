@@ -35,7 +35,7 @@ public class Main {
     private static void createGame() {
         JFrame Screen = new JFrame("You're the AI");
         Screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Screen.setSize(GScreen.WIDTH, GScreen.HEIGHT);
+        Screen.setSize(GScreen.WIDTH + 16, GScreen.HEIGHT + 39);
         Screen.setResizable(false);
         Screen.add(GameScreen);
         Screen.setVisible(true);

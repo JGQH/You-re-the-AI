@@ -18,7 +18,7 @@ public class GGame {
     public static void calculateDistances(){
         //Sends RAY_COUNT rays around the position to "see" the walls
         for(int i = 0; i < RAY_COUNT; i++){
-            int dir = i * 360 / RAY_COUNT; 
+            int dir = -i * 360 / RAY_COUNT; 
             GVector ray = new GVector(dir + Rotation);
             GVector mpt = getCollision(ray);
             GVector pt = GVector.diff(mpt, GGame.position);
