@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import Extras.GBoundary;
+import Extras.GSupport;
+import Extras.GVector;
 
 public class GScreen extends JPanel{
     private static final long serialVersionUID = 1L;
@@ -22,6 +24,9 @@ public class GScreen extends JPanel{
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
 
+        //===============================================//
+        //==================== SONAR ====================//
+        //===============================================//
         Image sonar = new ImageIcon("Resources/Sonar.png").getImage();
         g2d.drawImage(sonar, 224, 0, 576, 576, this);
 
@@ -30,7 +35,7 @@ public class GScreen extends JPanel{
         for (int i = 0; i < GGame.RAY_COUNT; i++) {
             float dis = GGame.distances[i];
             int x = 36 +224 + (int)(504 * (i + 1) / (GGame.RAY_COUNT + 1));
-            int y = (int)scale(dis, 0, GGame.MAX_DIST, 280, 120);
+            int y = (int)GSupport.scale(dis, 0, GGame.MAX_DIST, 414, 162); //(576 / 2) +- (540 - 36) / 4
 
             g2d.drawLine(lastX, lastY, x, y);
 
@@ -39,15 +44,18 @@ public class GScreen extends JPanel{
         }
         g2d.drawLine(lastX, lastY, 540 + 224, 288);
 
+        //==================================================//
+        //==================== ROTATION ====================//
+        //==================================================//
+        g2d.drawLine(512, 288, 512 + (int)(252 * Math.cos(GGame.Rotation * Math.PI / 180)), 288 + (int)(252 * Math.sin(GGame.Rotation * Math.PI / 180)));
+
         //TESTING PURPOSES
         for (GBoundary boundary: GGame.boundaries){
             g2d.drawLine(boundary.x1, boundary.y1, boundary.x2, boundary.y2);
         }
+        for(GVector pos: GGame.collisions){
+            g2d.drawOval((int)pos.x - 2, (int)pos.y - 2, 4, 4);
+        }
         g2d.drawOval((int)GGame.position.x - 2, (int)GGame.position.y - 2, 4, 4);
-    }
-
-    private float scale(float val, float min1, float max1, float min2, float max2){
-        float p = (val - min1) / (max1 - min1);
-        return min2 + p * (max2 - min2);
     }
 }

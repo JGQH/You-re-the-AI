@@ -3,9 +3,11 @@ package Classes;
 import java.util.Collections;
 import java.util.Vector;
 import Extras.GBoundary;
+import Extras.GSupport;
 import Extras.GVector;
 public class GGame {
-    public static final int RAY_COUNT = 32;
+    public static final int RAY_COUNT = 64;
+    public static final int FOV = 60;
     public static int MAX_DIST;
 
     public static GVector position;
@@ -18,12 +20,14 @@ public class GGame {
     public static void calculateDistances(){
         //Sends RAY_COUNT rays around the position to "see" the walls
         for(int i = 0; i < RAY_COUNT; i++){
-            int dir = -i * 360 / RAY_COUNT; 
-            GVector ray = new GVector(dir + Rotation);
+            float dir = Rotation + GSupport.scale(i, 0, RAY_COUNT - 1, -FOV / 2, FOV / 2);
+            GVector ray = new GVector(dir);
             GVector mpt = getCollision(ray);
+            collisions[i] = mpt;
+
             GVector pt = GVector.diff(mpt, GGame.position);
             distances[i] = pt.magnitude();
-            collisions[i] = pt;
+            
         }
     }
 

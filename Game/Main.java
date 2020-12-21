@@ -14,7 +14,7 @@ import Classes.GGame;
 import Classes.GLabyrinth;
 
 public class Main {
-    private static GScreen GameScreen = new GScreen();
+    private static GScreen GameScreen;
     private static final int FPS = 30;
 
     public static void main(String[] args) {
@@ -30,6 +30,7 @@ public class Main {
         GGame.collisions = new GVector[GGame.RAY_COUNT];
 
         GGame.labyrinth = new GLabyrinth(3);
+        GGame.calculateDistances();
     }
 
     private static void createGame() {
@@ -37,6 +38,8 @@ public class Main {
         Screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Screen.setSize(GScreen.WIDTH + 16, GScreen.HEIGHT + 39);
         Screen.setResizable(false);
+
+        GameScreen = new GScreen();
         Screen.add(GameScreen);
         Screen.setVisible(true);
         Screen.addKeyListener(new KeyListener(){
@@ -44,30 +47,22 @@ public class Main {
             public void keyPressed(KeyEvent e) {
                 switch(e.getKeyChar()){
                     case 'w':
-                        if(GGame.position.y > 0){
-                            GGame.position.y -= 1;
-                        }
+                        GGame.position.y -= 1;
                         break;
                     case 'a':
-                        if(GGame.position.x > 0){
-                            GGame.position.x -= 1;
-                        }
+                        GGame.position.x -= 1;
                         break;
                     case 's':
-                        if(GGame.position.y < GGame.labyrinth.SIZE * GLabyrinth.SCALER){
-                            GGame.position.y += 1;
-                        }
+                        GGame.position.y += 1;
                         break;
                     case 'd':
-                        if(GGame.position.x < GGame.labyrinth.SIZE * GLabyrinth.SCALER){
-                            GGame.position.x += 1;
-                        }
-                        break;
-                    case 'q':
-                        GGame.Rotation = (GGame.Rotation == 315) ? 0 : (GGame.Rotation + 45);
+                        GGame.position.x += 1;
                         break;
                     case 'e':
-                        GGame.Rotation = (GGame.Rotation == 0) ? 315 : (GGame.Rotation - 45);
+                        GGame.Rotation = (GGame.Rotation == 350) ? 0 : (GGame.Rotation + 10);
+                        break;
+                    case 'q':
+                        GGame.Rotation = (GGame.Rotation == 0) ? 350 : (GGame.Rotation - 10);
                         break;
                 }
             }
@@ -85,8 +80,8 @@ public class Main {
         ActionListener evt = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-                GGame.calculateDistances();
                 GameScreen.repaint();
+                GGame.calculateDistances();
 			}
         };
         new Timer(delay, evt).start();
