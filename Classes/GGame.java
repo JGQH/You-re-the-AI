@@ -8,6 +8,7 @@ import Extras.GVector;
 public class GGame {
     public static final int RAY_COUNT = 64;
     public static final int FOV = 60;
+    public static String GAME_STATE;
     public static int MAX_DIST;
 
     public static GVector position;
@@ -27,7 +28,9 @@ public class GGame {
 
             GVector pt = GVector.diff(mpt, GGame.position);
             distances[i] = pt.magnitude();
-            
+            if(distances[i] == 0){ //We crashed into a wall
+                GAME_STATE = "LOSE_EASY";
+            }
         }
     }
 

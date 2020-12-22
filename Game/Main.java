@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 //CUSTOM
 import Classes.GScreen;
+import Extras.GSupport;
 import Extras.GVector;
 import Classes.GGame;
 import Classes.GLabyrinth;
@@ -31,6 +32,7 @@ public class Main {
 
         GGame.labyrinth = new GLabyrinth(3);
         GGame.calculateDistances();
+        GGame.GAME_STATE = "ONGOING_EASY";
     }
 
     private static void createGame() {
@@ -45,24 +47,12 @@ public class Main {
         Screen.addKeyListener(new KeyListener(){
             @Override
             public void keyPressed(KeyEvent e) {
-                switch(e.getKeyChar()){
-                    case 'w':
-                        GGame.position.y -= 1;
-                        break;
-                    case 'a':
-                        GGame.position.x -= 1;
-                        break;
-                    case 's':
-                        GGame.position.y += 1;
-                        break;
-                    case 'd':
-                        GGame.position.x += 1;
-                        break;
-                    case 'e':
-                        GGame.Rotation = (GGame.Rotation == 350) ? 0 : (GGame.Rotation + 10);
-                        break;
-                    case 'q':
-                        GGame.Rotation = (GGame.Rotation == 0) ? 350 : (GGame.Rotation - 10);
+                //If the game is at a "LOSE" state, you cannot do anything (yet)
+                char key = e.getKeyChar();
+                switch(GGame.GAME_STATE){
+                    case "ONGOING_EASY":
+                    case "ONGOING_HARD":
+                        GSupport.movePlayer(key);
                         break;
                 }
             }
