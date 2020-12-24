@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import Extras.GBoundary;
 import Extras.GSupport;
 import Extras.GVector;
 
@@ -78,6 +77,8 @@ public class GScreen extends JPanel{
         screen.drawImage(sonar, 224, 0, 576, 576, this);
 
         //(36, 288) -> (540, 288)
+        screen.setStroke(new BasicStroke(1.5f));
+        screen.setColor(Color.BLACK);
         int lastX = 36 + 224; int lastY = 288;
         for (int i = 0; i < GGame.RAY_COUNT; i++) {
             float dis = GGame.distances[i];
@@ -103,7 +104,7 @@ public class GScreen extends JPanel{
         screen.setFont(this.customFont.deriveFont(50f));
         screen.drawString("LEVEL", 0, 50);
         screen.setFont(this.customFont.deriveFont(75f));
-        screen.drawString("  " + GGame.labyrinth.SIZE, 0, 110);
+        screen.drawString("  " + (GGame.labyrinth.SIZE - 2), 0, 110);
     }
 
     private void drawEasy(){
@@ -118,14 +119,10 @@ public class GScreen extends JPanel{
             screen.fillOval(x - 2, y - 2, 4, 4);
         }
 
-        for(GBoundary wall:GGame.boundaries){
-            screen.drawLine(wall.x1, wall.y1, wall.x2, wall.y2);
-        }
-
         screen.setColor(Color.RED);
         int x = (int)GSupport.scale(GGame.position.x, 0, GGame.MAX_DIST,  224, 800);
         int y = (int)GSupport.scale(GGame.position.y, 0, GGame.MAX_DIST, 0, HEIGHT);
-        screen.drawOval(x - 2, y - 2, 4, 4);
+        screen.fillOval(x - 3, y - 3, 6, 6);
         
         //===============================================//
         //==================== LEVEL ====================//
@@ -134,7 +131,7 @@ public class GScreen extends JPanel{
         screen.setFont(this.customFont.deriveFont(50f));
         screen.drawString("LEVEL", 0, 50);
         screen.setFont(this.customFont.deriveFont(75f));
-        screen.drawString("  " + GGame.labyrinth.SIZE, 0, 110);
+        screen.drawString("  " + (GGame.labyrinth.SIZE - 2), 0, 110);
     }
 
     private void drawLose() {

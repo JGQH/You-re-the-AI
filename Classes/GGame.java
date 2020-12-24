@@ -6,7 +6,7 @@ import Extras.GBoundary;
 import Extras.GSupport;
 import Extras.GVector;
 public class GGame {
-    public static final int RAY_COUNT = 128;
+    public static final int RAY_COUNT = 64;
     public static final int FOV = 60;
     public static String GAME_STATE;
     public static int MAX_DIST;
