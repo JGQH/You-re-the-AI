@@ -23,7 +23,7 @@ public class Main {
     private static final int FPS = 30;
 
     public static void main(String[] args) {
-        GGame.GAME_STATE = "ONGOING_EASY";
+        GGame.GAME_STATE = "MAIN_MENU";
         prepareGame();
         createGame();
         startTimer();
@@ -36,7 +36,6 @@ public class Main {
         GGame.collisions = new GVector[GGame.RAY_COUNT];
 
         GGame.labyrinth = new GLabyrinth(3);
-        GGame.calculateDistances();
     }
 
     private static void createGame() {

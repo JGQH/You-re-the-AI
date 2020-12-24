@@ -4,7 +4,7 @@ import java.util.Vector;
 import java.util.Random;
 import Extras.GBoundary;
 public class GLabyrinth {
-    public static final int SCALER = 10;
+    public static final int SCALER = 20;
 
     public int SIZE;
     public Cell[][] contents;

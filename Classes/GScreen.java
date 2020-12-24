@@ -57,6 +57,9 @@ public class GScreen extends JPanel{
             case "ONGOING_EASY":
                 this.drawEasy();
                 break;
+            case "ONGOING_HARD":
+                this.drawHard();
+                break;
             case "LOSE_EASY":
             case "LOSE_HARD":
                 this.drawLose();
@@ -67,7 +70,7 @@ public class GScreen extends JPanel{
         }
     }
 
-    private void drawEasy(){
+    private void drawHard(){
         //===============================================//
         //==================== SONAR ====================//
         //===============================================//
@@ -93,14 +96,45 @@ public class GScreen extends JPanel{
         //==================================================//
         screen.drawLine(512, 288, 512 + (int)(252 * Math.cos(GGame.Rotation * Math.PI / 180)), 288 + (int)(252 * Math.sin(GGame.Rotation * Math.PI / 180)));
 
-        //TESTING PURPOSES
-        for (GBoundary boundary: GGame.boundaries){
-            screen.drawLine(boundary.x1, boundary.y1, boundary.x2, boundary.y2);
+        //===============================================//
+        //==================== LEVEL ====================//
+        //===============================================//
+        screen.setColor(Color.WHITE);
+        screen.setFont(this.customFont.deriveFont(50f));
+        screen.drawString("LEVEL", 0, 50);
+        screen.setFont(this.customFont.deriveFont(75f));
+        screen.drawString("  " + GGame.labyrinth.SIZE, 0, 110);
+    }
+
+    private void drawEasy(){
+        //====================================================//
+        //==================== RAYCASTING ====================//
+        //====================================================//
+        screen.setColor(Color.WHITE);
+        for(GVector collision: GGame.collisions){
+            int x = (int)GSupport.scale(collision.x, 0, GGame.MAX_DIST,  224, 800);
+            int y = (int)GSupport.scale(collision.y, 0, GGame.MAX_DIST, 0, HEIGHT);
+
+            screen.fillOval(x - 2, y - 2, 4, 4);
         }
-        for(GVector pos: GGame.collisions){
-            screen.drawOval((int)pos.x - 2, (int)pos.y - 2, 4, 4);
+
+        for(GBoundary wall:GGame.boundaries){
+            screen.drawLine(wall.x1, wall.y1, wall.x2, wall.y2);
         }
-        screen.drawOval((int)GGame.position.x - 2, (int)GGame.position.y - 2, 4, 4);
+
+        screen.setColor(Color.RED);
+        int x = (int)GSupport.scale(GGame.position.x, 0, GGame.MAX_DIST,  224, 800);
+        int y = (int)GSupport.scale(GGame.position.y, 0, GGame.MAX_DIST, 0, HEIGHT);
+        screen.drawOval(x - 2, y - 2, 4, 4);
+        
+        //===============================================//
+        //==================== LEVEL ====================//
+        //===============================================//
+        screen.setColor(Color.WHITE);
+        screen.setFont(this.customFont.deriveFont(50f));
+        screen.drawString("LEVEL", 0, 50);
+        screen.setFont(this.customFont.deriveFont(75f));
+        screen.drawString("  " + GGame.labyrinth.SIZE, 0, 110);
     }
 
     private void drawLose() {

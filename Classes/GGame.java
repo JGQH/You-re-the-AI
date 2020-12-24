@@ -6,7 +6,7 @@ import Extras.GBoundary;
 import Extras.GSupport;
 import Extras.GVector;
 public class GGame {
-    public static final int RAY_COUNT = 64;
+    public static final int RAY_COUNT = 128;
     public static final int FOV = 60;
     public static String GAME_STATE;
     public static int MAX_DIST;
@@ -31,6 +31,15 @@ public class GGame {
             if(distances[i] == 0){ //We crashed into a wall
                 GAME_STATE = "LOSE_EASY";
             }
+        }
+
+        //Checks if we reached the end
+        int rx = (int)Math.floor(position.x / GLabyrinth.SCALER) + 1;
+        int ry = (int)Math.floor(position.y / GLabyrinth.SCALER) + 1;
+        if((rx == labyrinth.SIZE) && (ry == labyrinth.SIZE)){
+            GGame.Rotation = 0;
+            GGame.position = new GVector(1, 1);
+            labyrinth = new GLabyrinth(labyrinth.SIZE + 1);
         }
     }
 
