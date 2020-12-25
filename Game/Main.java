@@ -104,10 +104,10 @@ public class Main {
         ActionListener evt = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-                GameScreen.repaint();
                 if(GGame.GAME_STATE == "ONGOING_EASY" || GGame.GAME_STATE == "ONGOING_HARD"){
                     GGame.calculateDistances();
                 }
+                GameScreen.repaint();
 			}
         };
         new Timer(delay, evt).start();
