@@ -14,7 +14,7 @@ This project in particular was based on a comment in [this video](https://www.yo
 I thought it could be interesting, so I tried to do it...and here it is.
 
 ## Technologies
-* Java 8
+* Java 15
 
 ## General Info
 This is a game where the data is not entirely clear, and we're basically blind to the world, just like an AI.

@@ -54,6 +54,8 @@ public class Main {
                 if(GGame.GAME_STATE == "MAIN_MENU"){
                     Point mouseLoc = new Point(e.getX(), e.getY() - 39);
                     GameScreen.checkClick(mouseLoc);
+                }else if(GGame.GAME_STATE == "TUTORIAL"){
+                    GGame.GAME_STATE = "MAIN_MENU";
                 }
             }
 

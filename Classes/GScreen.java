@@ -42,6 +42,7 @@ public class GScreen extends JPanel{
 
     private void loadImages(){
         resources.put("sonar", new ImageIcon("Resources/easy/sonar.png").getImage());
+        resources.put("buttons", new ImageIcon("Resources/Tutorial/buttons.png").getImage());
 
         buttons.add(new GButton("Resources/Menu/easy_mode.png", 10, 10, 310, 110, "ONGOING_EASY"));
         buttons.add(new GButton("Resources/Menu/hard_mode.png", 10, 130, 310, 110, "ONGOING_HARD"));
@@ -65,6 +66,9 @@ public class GScreen extends JPanel{
                 break;
             case "MAIN_MENU":
                 this.drawMenu();
+                break;
+            case "TUTORIAL":
+                this.drawTutorial();
                 break;
         }
     }
@@ -154,6 +158,17 @@ public class GScreen extends JPanel{
         }
     }
 
+    private void drawTutorial(){
+        screen.setColor(Color.WHITE);
+        screen.setFont(this.customFont.deriveFont(60f));
+        screen.drawString("These are the only buttons you'll need", 25, 125);
+
+        Image btns = resources.get("buttons");
+        screen.drawImage(btns, 362, 188, 300, 200, this);
+
+        screen.drawString("Test them playing in the 'Easy Mode'", 30, 450);
+        screen.drawString("Click anywhere to return to menu", 40, 550);
+    }
     public void checkClick(Point mouseLoc){
         for(GButton btn: buttons){
             if(btn.contains(mouseLoc)){

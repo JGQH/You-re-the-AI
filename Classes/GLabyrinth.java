@@ -26,10 +26,11 @@ public class GLabyrinth {
     }
 
     private void createLabyrinth(){
-        this.contents[0][0]._visited = true;
-        Pos lastPos = new Pos(0, 0);
+        Pos lastPos = rndPos();
+        this.contents[lastPos._x][lastPos._y]._visited = true;
+        
         Vector<Pos> history = new Vector<>();
-        history.add(new Pos(0, 0));
+        history.add(lastPos);
 
         while(history.size() > 0){
             //First we get a random neighbor
@@ -120,6 +121,12 @@ public class GLabyrinth {
         }
     }
     
+    private Pos rndPos(){
+        int x = (int)(Math.random() * SIZE);
+        int y = (int)(Math.random() * SIZE);
+        return new Pos(x, y);
+    }
+
     private class Pos{
         public int _x, _y;
         public Pos(int x, int y){
